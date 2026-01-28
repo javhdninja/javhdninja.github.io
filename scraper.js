@@ -1,6 +1,5 @@
-const cheerio = require('cheerio');
-const fetch = require('node-fetch');
-const fs = require('fs');
+import * as cheerio from 'cheerio';
+import { writeFileSync } from 'fs';
 
 async function scrapeImages() {
     const allImages = [];
@@ -59,7 +58,7 @@ async function scrapeImages() {
         total: allImages.length
     };
     
-    fs.writeFileSync('images-data.json', JSON.stringify(data, null, 2));
+    writeFileSync('images-data.json', JSON.stringify(data, null, 2));
     console.log(`\n✓ Successfully saved ${allImages.length} images to images-data.json`);
     console.log(`Last updated: ${data.lastUpdated}`);
 }
