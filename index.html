@@ -71,7 +71,7 @@
         }
         .image-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(10, 1fr);
             gap: 15px;
         }
         .image-item {
@@ -176,7 +176,7 @@
         }
 
         // Fungsi untuk mendapatkan 5 gambar acak
-        function getRandomImages(imageArray, count = 5) {
+        function getRandomImages(imageArray, count = 10) {
             const shuffled = [...imageArray].sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
