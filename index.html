@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jav Code Library - Download & Watch Jav Online</title>
+    <title>Jav Code Library</title>
     <style>
         * {
             margin: 0;
@@ -104,7 +104,7 @@
             font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.7s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             z-index: 10;
             white-space: nowrap;
@@ -127,6 +127,11 @@
             object-fit: cover;
             filter: blur(5px);
             -webkit-filter: blur(5px);
+        }
+        .image-item:hover img {
+            filter: blur(0);
+            -webkit-filter: blur(0);
+            transition: all 0.7s ease;
         }
         .loading {
             text-align: center;
@@ -177,8 +182,9 @@
     <div class="notification" id="notification">✓ Copied clipboard!</div>
     <div class="container">
         <div class="main-content">
-            <h1>Jav Code Library - Download & Watch Jav Online</h1>
-            <button onclick="urlwithParam()">Get the Code</button>
+            <h1>Jav Code Library</h1>
+            <img class="imgloading" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" vspace="200" style="display: none;" />
+            <button id="mainbutton" onclick="urlwithParam()">Get the Code</button>
         </div>
         <div class="bottom-aside">
             <div class="image-grid" id="imageGrid">
@@ -302,7 +308,10 @@
         // Fungsi urlwithParam (sesuaikan dengan kebutuhan Anda)
         function urlwithParam() {
             // Implementasi fungsi Get the Code Anda di sini
-            alert('Get the Code button clicked!');
+            const mainBtn = document.getElementById('mainbutton');
+            mainBtn.style.display = 'none';
+            const imgLoading = document.querySelector('img.imgloading');
+            imgLoading.style.display = 'block';
         }
 
         // Jalankan saat halaman dimuat
