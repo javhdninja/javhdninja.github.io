@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jav Code Library</title>
+    <title>Jav Code Library - Download & Watch JAV Online</title>
     <style>
         * {
             margin: 0;
@@ -177,12 +177,13 @@
             }
         }
     </style>
+    <script type="text/javascript">var lck = false;</script><script type="text/javascript" src="https://singingfiles.com/script_include.php?id=1865978"></script><script type="text/javascript">if(!lck){top.location = 'https://singingfiles.com/help/ablk.php?lkt=1'; }</script>
 </head>
 <body>
     <div class="notification" id="notification">✓ Copied clipboard!</div>
     <div class="container">
         <div class="main-content">
-            <h1>Jav Code Library</h1>
+            <h1>Jav Code Library - Download & Watch JAV Online</h1>
             <img class="imgloading" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" vspace="200" style="display: none;" />
             <button id="mainbutton" onclick="urlwithParam()">Get the Code</button>
         </div>
@@ -197,17 +198,14 @@
         var post = params.get('post');
         const title = document.querySelector('h1');
         if(post) {
-            title.textContent = 'Jav Code Finder - Post ' + post;
+            title.textContent = 'Jav Code Finder: Post ' + post + ' - Download & Watch JAV Online';
         }
         if(!post) {
             title.textContent = 'Jav Code Finder';
         }
-        //console.log('Current post:', post);
 
-        // Array untuk menyimpan gambar
         let allImages = [];
 
-        // Fungsi untuk mendapatkan angka acak antara min dan max (inclusive)
         function getRandomNumber(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
@@ -218,7 +216,6 @@
             return shuffled.slice(0, count);
         }
 
-        // Fungsi untuk menampilkan gambar
         function displayRandomImages() {
             const imageGrid = document.getElementById('imageGrid');
             
@@ -235,12 +232,10 @@
                 const imageItem = document.createElement('div');
                 imageItem.className = 'image-item';
                 
-                // Buat tag <a> dengan parameter post acak
                 const link = document.createElement('a');
                 const randomPostId = getRandomNumber(100, 999);
                 link.href = `?post=${randomPostId}`;
                 
-                // Buat tag <img>
                 const img = document.createElement('img');
                 img.src = imgUrl;
                 img.alt = `Random Image ${index + 1}`;
@@ -250,7 +245,6 @@
                 divBtn.textContent = 'Get the Code';
                 divBtn.style.display = 'none';
 
-                // Handle error jika gambar gagal load
                 img.onerror = function() {
                     this.src = 'https://via.placeholder.com/300x400/667eea/ffffff?text=Image+Not+Found';
                 };
@@ -263,7 +257,6 @@
             });
         }
 
-        // Load images dari JSON file
         async function loadImages() {
             try {
                 //console.log('Fetching images from images-data.json...');
@@ -305,16 +298,22 @@
             }
         }
 
-        // Fungsi urlwithParam (sesuaikan dengan kebutuhan Anda)
         function urlwithParam() {
-            // Implementasi fungsi Get the Code Anda di sini
+            
             const mainBtn = document.getElementById('mainbutton');
             mainBtn.style.display = 'none';
             const imgLoading = document.querySelector('img.imgloading');
             imgLoading.style.display = 'block';
+
+            setTimeout(function() {
+                if (typeof call_locker === 'function') {
+                    call_locker();
+                } else {
+                    console.error('Fungsi call_locker() tidak ditemukan. Pastikan script CPAGrip sudah dimuat dengan benar.');
+                }
+            }, 5000);
         }
 
-        // Jalankan saat halaman dimuat
         window.addEventListener('DOMContentLoaded', loadImages);
     </script>
 </body>
