@@ -71,7 +71,7 @@
         }
         .image-grid {
             display: grid;
-            grid-template-columns: repeat(10, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 15px;
         }
         .image-item {
@@ -86,6 +86,35 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
+
+        .image-item:hover .overlaybutton {
+            display: block !important;
+        }
+
+        .overlaybutton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 0.95em;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        .overlaybutton:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+        
         .image-item a {
             display: block;
             width: 100%;
@@ -178,7 +207,7 @@
         }
 
         // Fungsi untuk mendapatkan 5 gambar acak
-        function getRandomImages(imageArray, count = 10) {
+        function getRandomImages(imageArray, count = 5) {
             const shuffled = [...imageArray].sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
@@ -192,7 +221,7 @@
                 return;
             }
             
-            const randomImages = getRandomImages(allImages, 10);
+            const randomImages = getRandomImages(allImages, 5);
             
             imageGrid.innerHTML = '';
             
@@ -210,7 +239,11 @@
                 img.src = imgUrl;
                 img.alt = `Random Image ${index + 1}`;
                 img.loading = 'lazy';
-                
+                const divBtn = document.createElement('button');
+                divBtn.className = 'overlaybutton';
+                divBtn.textContent = 'Get the Code';
+                divBtn.style.display = 'none';
+
                 // Handle error jika gambar gagal load
                 img.onerror = function() {
                     this.src = 'https://via.placeholder.com/300x400/667eea/ffffff?text=Image+Not+Found';
@@ -218,6 +251,7 @@
                 
                 // Susun struktur: imageItem > link > img
                 link.appendChild(img);
+                link.appendChild(divBtn);
                 imageItem.appendChild(link);
                 imageGrid.appendChild(imageItem);
             });
