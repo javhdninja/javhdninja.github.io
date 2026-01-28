@@ -167,7 +167,7 @@
         if(!post) {
             title.textContent = 'Jav Code Finder';
         }
-        console.log('Current post:', post);
+        //console.log('Current post:', post);
 
         // Array untuk menyimpan gambar
         let allImages = [];
@@ -192,7 +192,7 @@
                 return;
             }
             
-            const randomImages = getRandomImages(allImages, 5);
+            const randomImages = getRandomImages(allImages, 10);
             
             imageGrid.innerHTML = '';
             
@@ -226,7 +226,7 @@
         // Load images dari JSON file
         async function loadImages() {
             try {
-                console.log('Fetching images from images-data.json...');
+                //console.log('Fetching images from images-data.json...');
                 const response = await fetch('images-data.json');
                 
                 if (!response.ok) {
@@ -236,8 +236,8 @@
                 const data = await response.json();
                 allImages = data.images || [];
                 
-                console.log(`Loaded ${allImages.length} images`);
-                console.log(`Last updated: ${data.lastUpdated}`);
+                //console.log(`Loaded ${allImages.length} images`);
+                //console.log(`Last updated: ${data.lastUpdated}`);
                 
                 if (allImages.length > 0) {
                     displayRandomImages();
