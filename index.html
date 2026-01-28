@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jav Code Finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            height: calc(100vh - 40px);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .bottom-aside {
+            width: 100%;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+        .image-item {
+            position: relative;
+            aspect-ratio: 3/4;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .image-item a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+        }
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .loading {
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+            padding: 20px;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #38ef7d;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: none;
+            animation: slideIn 0.3s ease;
+            z-index: 1000;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">✓ Berhasil di-copy ke clipboard!</div>
+    <div class="container">
+        <div class="main-content">
+            <h1>Jav Code Finder</h1>
+            <button onclick="urlwithParam()">Get the Code</button>
+        </div>
+        <div class="bottom-aside">
+            <div class="image-grid" id="imageGrid">
+                <div class="loading">Loading images...</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var params = new URLSearchParams(window.location.search);
+        var post = params.get('post');
+        const title = document.querySelector('h1');
+        if(post) {
+            title.textContent = 'Jav Code Finder - Post ' + post;
+        }
+        if(!post) {
+            title.textContent = 'Jav Code Finder';
+        }
+        console.log('Current post:', post);
+
+        // Array untuk menyimpan gambar
+        let allImages = [];
+
+        // Fungsi untuk mendapatkan angka acak antara min dan max (inclusive)
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Fungsi untuk mendapatkan 5 gambar acak
+        function getRandomImages(imageArray, count = 5) {
+            const shuffled = [...imageArray].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        // Fungsi untuk menampilkan gambar
+        function displayRandomImages() {
+            const imageGrid = document.getElementById('imageGrid');
+            
+            if (allImages.length === 0) {
+                imageGrid.innerHTML = '<div class="loading">No images available</div>';
+                return;
+            }
+            
+            const randomImages = getRandomImages(allImages, 5);
+            
+            imageGrid.innerHTML = '';
+            
+            randomImages.forEach((imgUrl, index) => {
+                const imageItem = document.createElement('div');
+                imageItem.className = 'image-item';
+                
+                // Buat tag <a> dengan parameter post acak
+                const link = document.createElement('a');
+                const randomPostId = getRandomNumber(100, 999);
+                link.href = `?post=${randomPostId}`;
+                
+                // Buat tag <img>
+                const img = document.createElement('img');
+                img.src = imgUrl;
+                img.alt = `Random Image ${index + 1}`;
+                img.loading = 'lazy';
+                
+                // Handle error jika gambar gagal load
+                img.onerror = function() {
+                    this.src = 'https://via.placeholder.com/300x400/667eea/ffffff?text=Image+Not+Found';
+                };
+                
+                // Susun struktur: imageItem > link > img
+                link.appendChild(img);
+                imageItem.appendChild(link);
+                imageGrid.appendChild(imageItem);
+            });
+        }
+
+        // Load images dari JSON file
+        async function loadImages() {
+            try {
+                console.log('Fetching images from images-data.json...');
+                const response = await fetch('images-data.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                allImages = data.images || [];
+                
+                console.log(`Loaded ${allImages.length} images`);
+                console.log(`Last updated: ${data.lastUpdated}`);
+                
+                if (allImages.length > 0) {
+                    displayRandomImages();
+                } else {
+                    // Fallback ke placeholder jika tidak ada gambar
+                    console.warn('No images found, using placeholders');
+                    for (let i = 1; i <= 100; i++) {
+                        allImages.push(`https://picsum.photos/300/400?random=${i}`);
+                    }
+                    displayRandomImages();
+                }
+            } catch (error) {
+                console.error('Error loading images:', error);
+                
+                // Fallback ke placeholder jika gagal
+                const imageGrid = document.getElementById('imageGrid');
+                imageGrid.innerHTML = '<div class="loading">Failed to load images. Using placeholders...</div>';
+                
+                setTimeout(() => {
+                    for (let i = 1; i <= 100; i++) {
+                        allImages.push(`https://picsum.photos/300/400?random=${i}`);
+                    }
+                    displayRandomImages();
+                }, 1000);
+            }
+        }
+
+        // Fungsi urlwithParam (sesuaikan dengan kebutuhan Anda)
+        function urlwithParam() {
+            // Implementasi fungsi Get the Code Anda di sini
+            alert('Get the Code button clicked!');
+        }
+
+        // Jalankan saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', loadImages);
+    </script>
+</body>
+</html>
