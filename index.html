@@ -214,6 +214,16 @@
             animation: slideUp 0.3s ease;
         }
 
+        .modal-overlay.instagram-escape .modal-content {
+            max-width: 90vw;
+            height: 80vh;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 50px 40px;
+        }
+
         @keyframes slideUp {
             from {
                 transform: translateY(30px);
@@ -636,15 +646,28 @@
         }
 
         function setupInstagramEscapeModal(os) {
-            const escapeBtn = document.getElementById('instagramEscapeBtn');
-            if (escapeBtn) {
-                // Generate redirect URL untuk halaman yang sama (index.html)
-                const currentUrl = window.location.href;
-                const redirectUrl = generateRedirectUrl(currentUrl, os);
-                escapeBtn.href = redirectUrl;
-                escapeBtn.target = '_blank';
-            }
+        const escapeBtn = document.getElementById('instagramEscapeBtn');
+        const instagramModal = document.getElementById('instagramEscapeModal');
+        
+        if (escapeBtn) {
+            // Generate redirect URL untuk halaman yang sama (index.html)
+            const currentUrl = window.location.href;
+            const redirectUrl = generateRedirectUrl(currentUrl, os);
+            escapeBtn.href = redirectUrl;
+            escapeBtn.target = '_blank';
         }
+        
+        // Trigger button click saat ada click di manapun di modal
+        if (instagramModal) {
+            instagramModal.addEventListener('click', function(e) {
+                // Jangan trigger jika user klik tombol (button sudah punya onclick default)
+                if (e.target.tagName !== 'A') {
+                    const btn = document.getElementById('instagramEscapeBtn');
+                    if (btn) btn.click();
+                }
+            });
+        }
+    }
 
         function showLoading() {
             const loading = document.getElementById('loadingContainer');
