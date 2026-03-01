@@ -45,12 +45,12 @@
             margin-bottom: 20px;
             font-size: 2em;
         }
-        h3 {
-        color: #667eea;
+		h3 {
+		color: #667eea;
             margin-bottom: 20px;
             font-size: 1.5em;
-            text-align:center;
-        }
+			text-align:center;
+		}
         button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -222,11 +222,11 @@
 
         .modal-close {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             background: none;
             border: none;
-            font-size: 18px;
+            font-size: 28px;
             color: #999;
             cursor: pointer;
             padding: 0;
@@ -307,7 +307,7 @@
             display: none;
             text-align: center;
             position: fixed;
-            top: 30%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1400;
@@ -366,41 +366,64 @@
         <div class="main-content">
             <h1>Jav Code Library - Download & Watch JAV Online</h1>
             <button id="mainbutton" onclick="urlwithParam()">Get the Code</button>
-                <!-- LOADING ANIMATION -->
-                <div class="loading-container" id="loadingContainer">
-                    <div class="loading-spinner"></div>
-                </div>
         </div>
         <div class="bottom-aside">
-            <h3>You may also like:</h3>
+			<h3>You may also like:</h3>
             <div class="image-grid" id="imageGrid">
                 <div class="loading">Loading images...</div>
             </div>
         </div>
     </div>
 
+    <!-- LOADING ANIMATION -->
+    <div class="loading-container" id="loadingContainer">
+        <div class="loading-spinner"></div>
+    </div>
+
     <!-- MODAL POPUP -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
-
+            <h2 class="modal-heading" id="modalHeading">Unlock The Code</h2>
+            <p class="modal-description" id="modalDescription">Choose your preferred option to access the content</p>
             <div class="modal-buttons">
-                <a href="https://paraderascaldefinitely.com/iw785uu5m?key=87bb5c35c81e0cd6f87e3a3a5a5ad13a" class="modal-btn" id="modalBtnUnlock">Unlock the Code</a>
-                <a href="https://paraderascaldefinitely.com/iw785uu5m?key=87bb5c35c81e0cd6f87e3a3a5a5ad13a" class="modal-btn secondary" id="modalBtnSubtitle">Watch JAV English Subtitle</a>
+                <a href="#" class="modal-btn" id="modalBtnUnlock">Unlock the Code</a>
+                <a href="#" class="modal-btn secondary" id="modalBtnSubtitle">Watch in Subtitle</a>
             </div>
         </div>
     </div>
-    <script src="https://paraderascaldefinitely.com/8a/62/27/8a6227e75a1a772ebdfb68d051aba829.js"></script>
+
     <script>
-        var params = new URLSearchParams(window.location.search);
-        var post = params.get('post');
-        const title = document.querySelector('h1');
-        if(post) {
-            title.textContent = 'Jav Code: Post ' + post;
+        // ===== INSTAGRAM IN-APP BROWSER & OS DETECTION =====
+        function isInstagramInAppBrowser() {
+            const ua = navigator.userAgent;
+            return ua.includes('Instagram') || ua.includes('FBAN') || ua.includes('FBAV') || ua.includes('FB_IAB') || ua.includes('TikTok') || ua.includes('WhatsApp');
         }
-        if(!post) {
-            title.textContent = 'Jav Code Finder';
+
+        function getDeviceOS() {
+            const ua = navigator.userAgent;
+            
+            if (/android/i.test(ua)) {
+                return 'android';
+            }
+            if (/iphone|ipad|ipod/i.test(ua)) {
+                return 'ios';
+            }
+            return 'unknown';
         }
+
+        function generateRedirectUrl(targetUrl, os) {
+            let urlWithoutProtocol = targetUrl.replace('https://', '').replace('http://', '');
+            
+            if (os === 'android') {
+                return `intent://${urlWithoutProtocol}#Intent;scheme=https;end;`;
+            } else if (os === 'ios') {
+                return `x-safari-https://${urlWithoutProtocol}`;
+            } else {
+                return targetUrl;
+            }
+        }
+
         // ===== LANGUAGE CONFIGURATION =====
         const translations = {
             en: {
@@ -408,49 +431,49 @@
                 modalHeading: 'Unlock The Code',
                 modalDescription: 'Choose your preferred option to access the content',
                 unlockBtn: 'Unlock the Code',
-                subtitleBtn: 'Watch JAV English Subtitle'
+                subtitleBtn: 'Watch in English Subtitle'
             },
             fil: {
                 mainButton: 'Kunin ang Code',
                 modalHeading: 'Buksan ang Code',
                 modalDescription: 'Pumili ng iyong preferred na opsyon upang makuha ang access sa content',
                 unlockBtn: 'Buksan ang Code',
-                subtitleBtn: 'Panoorin JAV Filipino Subtitle'
+                subtitleBtn: 'Panoorin sa Filipino Subtitle'
             },
             vi: {
                 mainButton: 'Lấy Mã',
                 modalHeading: 'Mở Khóa Mã',
                 modalDescription: 'Chọn tùy chọn ưa thích của bạn để truy cập nội dung',
                 unlockBtn: 'Mở Khóa Mã',
-                subtitleBtn: 'Xem JAV Việt Sub'
+                subtitleBtn: 'Xem với Phụ Đề Tiếng Việt'
             },
             es: {
                 mainButton: 'Obtener el Código',
                 modalHeading: 'Desbloquear el Código',
                 modalDescription: 'Elige tu opción preferida para acceder al contenido',
                 unlockBtn: 'Desbloquear el Código',
-                subtitleBtn: 'Ver JAV en Español'
+                subtitleBtn: 'Ver con Subtítulos en Español'
             },
             pt: {
                 mainButton: 'Obter o Código',
                 modalHeading: 'Desbloquear o Código',
                 modalDescription: 'Escolha sua opção preferida para acessar o conteúdo',
                 unlockBtn: 'Desbloquear o Código',
-                subtitleBtn: 'Assistir JAV Legendas em Português'
+                subtitleBtn: 'Assistir com Legendas em Português'
             },
             de: {
                 mainButton: 'Code Abrufen',
                 modalHeading: 'Code Entsperren',
                 modalDescription: 'Wählen Sie Ihre bevorzugte Option, um auf den Inhalt zuzugreifen',
                 unlockBtn: 'Code Entsperren',
-                subtitleBtn: 'JAV Ger Sub ansehen.'
+                subtitleBtn: 'Mit deutschen Untertiteln anschauen'
             },
             fr: {
                 mainButton: 'Obtenir le Code',
                 modalHeading: 'Déverrouiller le Code',
                 modalDescription: 'Choisissez votre option préférée pour accéder au contenu',
                 unlockBtn: 'Déverrouiller le Code',
-                subtitleBtn: 'Voir JAV en français'
+                subtitleBtn: 'Regarder en Français avec sous-titres'
             },
             ar: {
                 mainButton: 'احصل على الكود',
@@ -537,21 +560,16 @@
         function closeModal() {
             const modal = document.getElementById('modalOverlay');
             modal.classList.remove('active');
-            const mainBtn = document.getElementById('mainbutton');
-            mainBtn.style.display = 'block';
         }
 
         function showLoading() {
             const loading = document.getElementById('loadingContainer');
             loading.classList.add('active');
-            const mainBtn = document.getElementById('mainbutton');
-            mainBtn.style.display = 'none';
         }
 
         function hideLoading() {
             const loading = document.getElementById('loadingContainer');
             loading.classList.remove('active');
-            
         }
 
         // ===== EVENT LISTENERS =====
@@ -559,6 +577,31 @@
             // Detect language on page load
             detectLanguage();
             updateLanguage(currentLanguage);
+            
+            // Setup modal buttons dengan generated URLs untuk Instagram in-app browser
+            const isInApp = isInstagramInAppBrowser();
+            const os = getDeviceOS();
+            
+            if (isInApp) {
+                // PENTING: Ganti URL Adsterra Anda di sini
+                const adsterraUnlock = 'https://your-adsterra-unlock-link.com';
+                const adsterraSubtitle = 'https://your-adsterra-subtitle-link.com';
+                
+                const unlockUrl = generateRedirectUrl(adsterraUnlock, os);
+                const subtitleUrl = generateRedirectUrl(adsterraSubtitle, os);
+                
+                const unlockBtn = document.getElementById('modalBtnUnlock');
+                const subtitleBtn = document.getElementById('modalBtnSubtitle');
+                
+                if (unlockBtn) {
+                    unlockBtn.href = unlockUrl;
+                    unlockBtn.target = '_blank';
+                }
+                if (subtitleBtn) {
+                    subtitleBtn.href = subtitleUrl;
+                    subtitleBtn.target = '_blank';
+                }
+            }
             
             // Modal close button
             const closeBtn = document.getElementById('modalClose');
