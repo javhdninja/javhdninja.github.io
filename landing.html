@@ -394,40 +394,6 @@
     </div>
 
     <script>
-        // ===== IN-APP BROWSER DETECTION & REDIRECT =====
-        // Cek apakah halaman ini diakses dari in-app browser
-        // Jika ya, redirect ke landing page
-        function checkAndRedirectIfInApp() {
-            const ua = navigator.userAgent;
-            
-            // Instagram
-            if (ua.includes('Instagram')) {
-                window.location.href = 'landing.html';
-                return;
-            }
-            
-            // Facebook
-            if (ua.includes('FBAN') || ua.includes('FBAV') || ua.includes('FB_IAB')) {
-                window.location.href = 'landing.html';
-                return;
-            }
-            
-            // TikTok
-            if (ua.includes('TikTok')) {
-                window.location.href = 'landing.html';
-                return;
-            }
-            
-            // WhatsApp
-            if (ua.includes('WhatsApp')) {
-                window.location.href = 'landing.html';
-                return;
-            }
-        }
-        
-        // Check on page load
-        checkAndRedirectIfInApp();
-
         // ===== LANGUAGE CONFIGURATION =====
         const translations = {
             en: {
