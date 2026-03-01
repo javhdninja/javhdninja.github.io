@@ -45,6 +45,12 @@
             margin-bottom: 20px;
             font-size: 2em;
         }
+		h3 {
+		color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+			text-align:center;
+		}
         button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -163,6 +169,168 @@
                 opacity: 1;
             }
         }
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1500;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #999;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+            box-shadow: none;
+        }
+
+        .modal-close:hover {
+            color: #333;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .modal-heading {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .modal-description {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .modal-btn:active {
+            transform: translateY(0);
+        }
+
+        .modal-btn.secondary {
+            background: #f0f0f0;
+            color: #667eea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-btn.secondary:hover {
+            background: #e8e8e8;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* LOADING ANIMATION */
+        .loading-container {
+            display: none;
+            text-align: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1400;
+        }
+
+        .loading-container.active {
+            display: block;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.5em;
@@ -171,50 +339,286 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
+            .modal-content {
+                padding: 30px 20px;
+                max-width: 90%;
+            }
+            .modal-heading {
+                font-size: 1.4em;
+            }
         }
         @media (max-width: 480px) {
             .image-grid {
                 grid-template-columns: 1fr;
             }
+            .modal-content {
+                padding: 25px 15px;
+            }
+            .modal-heading {
+                font-size: 1.2em;
+            }
         }
     </style>
-<!-- <script type="text/javascript">var lck = false;</script><script type="text/javascript" src="https://singingfiles.com/script_include.php?id=1865978"></script><script type="text/javascript">if(!lck){top.location = 'https://singingfiles.com/help/ablk.php?lkt=1'; }</script>
--->
 </head>
 <body>
     <div class="notification" id="notification">✓ Copied clipboard!</div>
     <div class="container">
         <div class="main-content">
             <h1>Jav Code Library - Download & Watch JAV Online</h1>
-            <img class="imgloading" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" vspace="200" style="display: none;" />
             <button id="mainbutton" onclick="urlwithParam()">Get the Code</button>
         </div>
         <div class="bottom-aside">
+			<h3>You may also like:</h3>
             <div class="image-grid" id="imageGrid">
                 <div class="loading">Loading images...</div>
             </div>
         </div>
     </div>
-    <script src="https://pl28591733.effectivegatecpm.com/8a/62/27/8a6227e75a1a772ebdfb68d051aba829.js"></script>
-    
+
+    <!-- LOADING ANIMATION -->
+    <div class="loading-container" id="loadingContainer">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- MODAL POPUP -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2 class="modal-heading" id="modalHeading">Unlock The Code</h2>
+            <p class="modal-description" id="modalDescription">Choose your preferred option to access the content</p>
+            <div class="modal-buttons">
+                <a href="#" class="modal-btn" id="modalBtnUnlock">Unlock the Code</a>
+                <a href="#" class="modal-btn secondary" id="modalBtnSubtitle">Watch in Subtitle</a>
+            </div>
+        </div>
+    </div>
+
     <script>
-        var params = new URLSearchParams(window.location.search);
-        var post = params.get('post');
-        const title = document.querySelector('h1');
-        if(post) {
-            title.textContent = 'Jav Code Finder: Post ' + post + ' - Download & Watch JAV Online';
+        // ===== IN-APP BROWSER DETECTION & REDIRECT =====
+        // Cek apakah halaman ini diakses dari in-app browser
+        // Jika ya, redirect ke landing page
+        function checkAndRedirectIfInApp() {
+            const ua = navigator.userAgent;
+            
+            // Instagram
+            if (ua.includes('Instagram')) {
+                window.location.href = 'landing.html';
+                return;
+            }
+            
+            // Facebook
+            if (ua.includes('FBAN') || ua.includes('FBAV') || ua.includes('FB_IAB')) {
+                window.location.href = 'landing.html';
+                return;
+            }
+            
+            // TikTok
+            if (ua.includes('TikTok')) {
+                window.location.href = 'landing.html';
+                return;
+            }
+            
+            // WhatsApp
+            if (ua.includes('WhatsApp')) {
+                window.location.href = 'landing.html';
+                return;
+            }
         }
-        if(!post) {
-            title.textContent = 'Jav Code Finder';
+        
+        // Check on page load
+        checkAndRedirectIfInApp();
+
+        // ===== LANGUAGE CONFIGURATION =====
+        const translations = {
+            en: {
+                mainButton: 'Get the Code',
+                modalHeading: 'Unlock The Code',
+                modalDescription: 'Choose your preferred option to access the content',
+                unlockBtn: 'Unlock the Code',
+                subtitleBtn: 'Watch in English Subtitle'
+            },
+            fil: {
+                mainButton: 'Kunin ang Code',
+                modalHeading: 'Buksan ang Code',
+                modalDescription: 'Pumili ng iyong preferred na opsyon upang makuha ang access sa content',
+                unlockBtn: 'Buksan ang Code',
+                subtitleBtn: 'Panoorin sa Filipino Subtitle'
+            },
+            vi: {
+                mainButton: 'Lấy Mã',
+                modalHeading: 'Mở Khóa Mã',
+                modalDescription: 'Chọn tùy chọn ưa thích của bạn để truy cập nội dung',
+                unlockBtn: 'Mở Khóa Mã',
+                subtitleBtn: 'Xem với Phụ Đề Tiếng Việt'
+            },
+            es: {
+                mainButton: 'Obtener el Código',
+                modalHeading: 'Desbloquear el Código',
+                modalDescription: 'Elige tu opción preferida para acceder al contenido',
+                unlockBtn: 'Desbloquear el Código',
+                subtitleBtn: 'Ver con Subtítulos en Español'
+            },
+            pt: {
+                mainButton: 'Obter o Código',
+                modalHeading: 'Desbloquear o Código',
+                modalDescription: 'Escolha sua opção preferida para acessar o conteúdo',
+                unlockBtn: 'Desbloquear o Código',
+                subtitleBtn: 'Assistir com Legendas em Português'
+            },
+            de: {
+                mainButton: 'Code Abrufen',
+                modalHeading: 'Code Entsperren',
+                modalDescription: 'Wählen Sie Ihre bevorzugte Option, um auf den Inhalt zuzugreifen',
+                unlockBtn: 'Code Entsperren',
+                subtitleBtn: 'Mit deutschen Untertiteln anschauen'
+            },
+            fr: {
+                mainButton: 'Obtenir le Code',
+                modalHeading: 'Déverrouiller le Code',
+                modalDescription: 'Choisissez votre option préférée pour accéder au contenu',
+                unlockBtn: 'Déverrouiller le Code',
+                subtitleBtn: 'Regarder en Français avec sous-titres'
+            },
+            ar: {
+                mainButton: 'احصل على الكود',
+                modalHeading: 'فتح الكود',
+                modalDescription: 'اختر خيارك المفضل للوصول إلى المحتوى',
+                unlockBtn: 'فتح الكود',
+                subtitleBtn: 'شاهد مع الترجمة العربية'
+            },
+            zh: {
+                mainButton: '获取代码',
+                modalHeading: '解锁代码',
+                modalDescription: '选择您的首选选项来访问内容',
+                unlockBtn: '解锁代码',
+                subtitleBtn: '观看中文字幕'
+            },
+            it: {
+                mainButton: 'Ottieni il Codice',
+                modalHeading: 'Sblocca il Codice',
+                modalDescription: 'Scegli la tua opzione preferita per accedere al contenuto',
+                unlockBtn: 'Sblocca il Codice',
+                subtitleBtn: 'Guarda con Sottotitoli in Italiano'
+            },
+            pl: {
+                mainButton: 'Uzyskaj Kod',
+                modalHeading: 'Odblokuj Kod',
+                modalDescription: 'Wybierz preferowaną opcję, aby uzyskać dostęp do zawartości',
+                unlockBtn: 'Odblokuj Kod',
+                subtitleBtn: 'Oglądaj z Napisami w Polskim'
+            }
+        };
+
+        // ===== LANGUAGE DETECTION & INITIALIZATION =====
+        let currentLanguage = 'en';
+
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            const langCode = browserLang.split('-')[0].toLowerCase();
+            
+            // Map language codes to our translation keys
+            const langMap = {
+                'fil': 'fil',
+                'tl': 'fil',    // Tagalog to Filipino
+                'vi': 'vi',
+                'es': 'es',
+                'pt': 'pt',
+                'de': 'de',
+                'fr': 'fr',
+                'ar': 'ar',
+                'zh': 'zh',
+                'it': 'it',
+                'pl': 'pl'
+            };
+            
+            currentLanguage = langMap[langCode] || 'en';
+            return currentLanguage;
         }
 
+        function updateLanguage(lang) {
+            currentLanguage = lang;
+            const t = translations[lang];
+            
+            // Update main button
+            const mainBtn = document.getElementById('mainbutton');
+            if (mainBtn) mainBtn.textContent = t.mainButton;
+            
+            // Update modal elements
+            const modalHeading = document.getElementById('modalHeading');
+            const modalDesc = document.getElementById('modalDescription');
+            const unlockBtn = document.getElementById('modalBtnUnlock');
+            const subtitleBtn = document.getElementById('modalBtnSubtitle');
+            
+            if (modalHeading) modalHeading.textContent = t.modalHeading;
+            if (modalDesc) modalDesc.textContent = t.modalDescription;
+            if (unlockBtn) unlockBtn.textContent = t.unlockBtn;
+            if (subtitleBtn) subtitleBtn.textContent = t.subtitleBtn;
+        }
+
+        // ===== MODAL FUNCTIONS =====
+        function openModal() {
+            const modal = document.getElementById('modalOverlay');
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modalOverlay');
+            modal.classList.remove('active');
+        }
+
+        function showLoading() {
+            const loading = document.getElementById('loadingContainer');
+            loading.classList.add('active');
+        }
+
+        function hideLoading() {
+            const loading = document.getElementById('loadingContainer');
+            loading.classList.remove('active');
+        }
+
+        // ===== EVENT LISTENERS =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Detect language on page load
+            detectLanguage();
+            updateLanguage(currentLanguage);
+            
+            // Modal close button
+            const closeBtn = document.getElementById('modalClose');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
+            }
+            
+            // Close modal when clicking outside (optional - remove if you don't want this)
+            // const modalOverlay = document.getElementById('modalOverlay');
+            // if (modalOverlay) {
+            //     modalOverlay.addEventListener('click', function(e) {
+            //         if (e.target === modalOverlay) {
+            //             closeModal();
+            //         }
+            //     });
+            // }
+            
+            loadImages();
+        });
+
+        // ===== MAIN BUTTON CLICK HANDLER =====
+        function urlwithParam() {
+            showLoading();
+            
+            // Show modal after 5 seconds
+            setTimeout(function() {
+                hideLoading();
+                openModal();
+            }, 5000);
+        }
+
+        // ===== IMAGE LOADING FUNCTIONS =====
         let allImages = [];
 
         function getRandomNumber(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
-        // Fungsi untuk mendapatkan 5 gambar acak
         function getRandomImages(imageArray, count = 5) {
             const shuffled = [...imageArray].sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
@@ -242,18 +646,19 @@
                 
                 const img = document.createElement('img');
                 img.src = imgUrl;
-                img.alt = `Post ${post}`;
+                img.alt = `Post ${randomPostId}`;
                 img.loading = 'lazy';
+                
                 const divBtn = document.createElement('button');
                 divBtn.className = 'overlaybutton';
-                divBtn.textContent = 'Get the Code';
+                const t = translations[currentLanguage];
+                divBtn.textContent = t.mainButton;
                 divBtn.style.display = 'none';
 
                 img.onerror = function() {
                     this.src = 'https://picsum.photos/300/400?random=';
                 };
                 
-                // Susun struktur: imageItem > link > img
                 link.appendChild(img);
                 link.appendChild(divBtn);
                 imageItem.appendChild(link);
@@ -263,7 +668,6 @@
 
         async function loadImages() {
             try {
-                //console.log('Fetching images from images-data.json...');
                 const response = await fetch('images-data.json');
                 
                 if (!response.ok) {
@@ -273,15 +677,9 @@
                 const data = await response.json();
                 allImages = data.images || [];
                 
-                //console.log(`Loaded ${allImages.length} images`);
-                //console.log(`Last updated: ${data.lastUpdated}`);
-                console.log(response);
-                console.log(data);
-                console.log(allImages);
                 if (allImages.length > 0) {
                     displayRandomImages();
                 } else {
-                    // Fallback ke placeholder jika tidak ada gambar
                     console.warn('No images found, using placeholders');
                     for (let i = 1; i <= 100; i++) {
                         allImages.push(`https://picsum.photos/300/400?random=${i}`);
@@ -291,7 +689,6 @@
             } catch (error) {
                 console.error('Error loading images:', error);
                 
-                // Fallback ke placeholder jika gagal
                 const imageGrid = document.getElementById('imageGrid');
                 imageGrid.innerHTML = '<div class="loading">Failed to load images. Using placeholders...</div>';
                 
@@ -303,26 +700,6 @@
                 }, 1000);
             }
         }
-
-        function urlwithParam() {
-            
-            const mainBtn = document.getElementById('mainbutton');
-            mainBtn.style.display = 'none';
-            const imgLoading = document.querySelector('img.imgloading');
-            imgLoading.style.display = 'block';
-
-            setTimeout(function() {
-                if (typeof call_locker === 'function') {
-                    call_locker();
-                } else {
-                    console.error('Fungsi call_locker() tidak ditemukan. Pastikan script CPAGrip sudah dimuat dengan benar.');
-                }
-                imgLoading.style.display = 'none';
-                mainBtn.style.display = 'block';
-            }, 5000);
-        }
-
-        window.addEventListener('DOMContentLoaded', loadImages);
     </script>
 </body>
 </html>
