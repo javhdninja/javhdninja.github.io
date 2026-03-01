@@ -45,12 +45,12 @@
             margin-bottom: 20px;
             font-size: 2em;
         }
-		h3 {
-		color: #667eea;
+        h3 {
+        color: #667eea;
             margin-bottom: 20px;
             font-size: 1.5em;
-			text-align:center;
-		}
+            text-align:center;
+        }
         button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -187,6 +187,11 @@
 
         .modal-overlay.active {
             display: flex;
+        }
+
+        /* Modal untuk Escape Instagram */
+        .modal-overlay.instagram-escape {
+            z-index: 1600;
         }
 
         @keyframes fadeIn {
@@ -368,7 +373,7 @@
             <button id="mainbutton" onclick="urlwithParam()">Get the Code</button>
         </div>
         <div class="bottom-aside">
-			<h3>You may also like:</h3>
+            <h3>You may also like:</h3>
             <div class="image-grid" id="imageGrid">
                 <div class="loading">Loading images...</div>
             </div>
@@ -380,12 +385,22 @@
         <div class="loading-spinner"></div>
     </div>
 
-    <!-- MODAL POPUP -->
+    <!-- MODAL ESCAPE INSTAGRAM (Modal Baru) -->
+    <div class="modal-overlay instagram-escape" id="instagramEscapeModal">
+        <div class="modal-content">
+            <h2 class="modal-heading" id="instagramEscapeHeading">Open in Browser</h2>
+            <p class="modal-description" id="instagramEscapeDesc">For the best experience, please open this site in your default browser.</p>
+            <div class="modal-buttons">
+                <a href="#" class="modal-btn" id="instagramEscapeBtn">Open in Browser</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL UNLOCK THE CODE (Modal Original) -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
             <h2 class="modal-heading" id="modalHeading">Unlock The Code</h2>
-            <p class="modal-description" id="modalDescription">Choose your preferred option to access the content</p>
             <div class="modal-buttons">
                 <a href="#" class="modal-btn" id="modalBtnUnlock">Unlock the Code</a>
                 <a href="#" class="modal-btn secondary" id="modalBtnSubtitle">Watch in Subtitle</a>
@@ -428,6 +443,9 @@
         const translations = {
             en: {
                 mainButton: 'Get the Code',
+                instagramEscapeHeading: 'Open in Browser',
+                instagramEscapeDesc: 'For the best experience, please open this site in your default browser.',
+                instagramEscapeBtn: 'Open in Browser',
                 modalHeading: 'Unlock The Code',
                 modalDescription: 'Choose your preferred option to access the content',
                 unlockBtn: 'Unlock the Code',
@@ -435,6 +453,9 @@
             },
             fil: {
                 mainButton: 'Kunin ang Code',
+                instagramEscapeHeading: 'Buksan sa Browser',
+                instagramEscapeDesc: 'Para sa pinakamahusay na karanasan, mangyaring buksan ang site na ito sa iyong default browser.',
+                instagramEscapeBtn: 'Buksan sa Browser',
                 modalHeading: 'Buksan ang Code',
                 modalDescription: 'Pumili ng iyong preferred na opsyon upang makuha ang access sa content',
                 unlockBtn: 'Buksan ang Code',
@@ -442,6 +463,9 @@
             },
             vi: {
                 mainButton: 'Lấy Mã',
+                instagramEscapeHeading: 'Mở trong Trình Duyệt',
+                instagramEscapeDesc: 'Để có trải nghiệm tốt nhất, vui lòng mở trang web này trong trình duyệt mặc định của bạn.',
+                instagramEscapeBtn: 'Mở trong Trình Duyệt',
                 modalHeading: 'Mở Khóa Mã',
                 modalDescription: 'Chọn tùy chọn ưa thích của bạn để truy cập nội dung',
                 unlockBtn: 'Mở Khóa Mã',
@@ -449,6 +473,9 @@
             },
             es: {
                 mainButton: 'Obtener el Código',
+                instagramEscapeHeading: 'Abrir en Navegador',
+                instagramEscapeDesc: 'Para la mejor experiencia, abre este sitio en tu navegador predeterminado.',
+                instagramEscapeBtn: 'Abrir en Navegador',
                 modalHeading: 'Desbloquear el Código',
                 modalDescription: 'Elige tu opción preferida para acceder al contenido',
                 unlockBtn: 'Desbloquear el Código',
@@ -456,6 +483,9 @@
             },
             pt: {
                 mainButton: 'Obter o Código',
+                instagramEscapeHeading: 'Abrir no Navegador',
+                instagramEscapeDesc: 'Para a melhor experiência, abra este site no seu navegador padrão.',
+                instagramEscapeBtn: 'Abrir no Navegador',
                 modalHeading: 'Desbloquear o Código',
                 modalDescription: 'Escolha sua opção preferida para acessar o conteúdo',
                 unlockBtn: 'Desbloquear o Código',
@@ -463,6 +493,9 @@
             },
             de: {
                 mainButton: 'Code Abrufen',
+                instagramEscapeHeading: 'Im Browser Öffnen',
+                instagramEscapeDesc: 'Öffnen Sie diese Website am besten in Ihrem Standardbrowser.',
+                instagramEscapeBtn: 'Im Browser Öffnen',
                 modalHeading: 'Code Entsperren',
                 modalDescription: 'Wählen Sie Ihre bevorzugte Option, um auf den Inhalt zuzugreifen',
                 unlockBtn: 'Code Entsperren',
@@ -470,6 +503,9 @@
             },
             fr: {
                 mainButton: 'Obtenir le Code',
+                instagramEscapeHeading: 'Ouvrir dans le Navigateur',
+                instagramEscapeDesc: 'Pour une meilleure expérience, ouvrez ce site dans votre navigateur par défaut.',
+                instagramEscapeBtn: 'Ouvrir dans le Navigateur',
                 modalHeading: 'Déverrouiller le Code',
                 modalDescription: 'Choisissez votre option préférée pour accéder au contenu',
                 unlockBtn: 'Déverrouiller le Code',
@@ -477,6 +513,9 @@
             },
             ar: {
                 mainButton: 'احصل على الكود',
+                instagramEscapeHeading: 'فتح في المتصفح',
+                instagramEscapeDesc: 'للحصول على أفضل تجربة، يرجى فتح هذا الموقع في متصفحك الافتراضي.',
+                instagramEscapeBtn: 'فتح في المتصفح',
                 modalHeading: 'فتح الكود',
                 modalDescription: 'اختر خيارك المفضل للوصول إلى المحتوى',
                 unlockBtn: 'فتح الكود',
@@ -484,6 +523,9 @@
             },
             zh: {
                 mainButton: '获取代码',
+                instagramEscapeHeading: '在浏览器中打开',
+                instagramEscapeDesc: '为了获得最佳体验，请在您的默认浏览器中打开此网站。',
+                instagramEscapeBtn: '在浏览器中打开',
                 modalHeading: '解锁代码',
                 modalDescription: '选择您的首选选项来访问内容',
                 unlockBtn: '解锁代码',
@@ -491,6 +533,9 @@
             },
             it: {
                 mainButton: 'Ottieni il Codice',
+                instagramEscapeHeading: 'Apri nel Browser',
+                instagramEscapeDesc: 'Per la migliore esperienza, apri questo sito nel tuo browser predefinito.',
+                instagramEscapeBtn: 'Apri nel Browser',
                 modalHeading: 'Sblocca il Codice',
                 modalDescription: 'Scegli la tua opzione preferita per accedere al contenuto',
                 unlockBtn: 'Sblocca il Codice',
@@ -498,6 +543,9 @@
             },
             pl: {
                 mainButton: 'Uzyskaj Kod',
+                instagramEscapeHeading: 'Otwórz w Przeglądarce',
+                instagramEscapeDesc: 'Aby uzyskać najlepsze doświadczenie, otwórz tę witrynę w domyślnej przeglądarce.',
+                instagramEscapeBtn: 'Otwórz w Przeglądarce',
                 modalHeading: 'Odblokuj Kod',
                 modalDescription: 'Wybierz preferowaną opcję, aby uzyskać dostęp do zawartości',
                 unlockBtn: 'Odblokuj Kod',
@@ -539,7 +587,16 @@
             const mainBtn = document.getElementById('mainbutton');
             if (mainBtn) mainBtn.textContent = t.mainButton;
             
-            // Update modal elements
+            // Update Instagram Escape Modal elements
+            const instagramHeading = document.getElementById('instagramEscapeHeading');
+            const instagramDesc = document.getElementById('instagramEscapeDesc');
+            const instagramBtn = document.getElementById('instagramEscapeBtn');
+            
+            if (instagramHeading) instagramHeading.textContent = t.instagramEscapeHeading;
+            if (instagramDesc) instagramDesc.textContent = t.instagramEscapeDesc;
+            if (instagramBtn) instagramBtn.textContent = t.instagramEscapeBtn;
+            
+            // Update Unlock the Code Modal elements
             const modalHeading = document.getElementById('modalHeading');
             const modalDesc = document.getElementById('modalDescription');
             const unlockBtn = document.getElementById('modalBtnUnlock');
@@ -562,6 +619,32 @@
             modal.classList.remove('active');
         }
 
+        // Instagram Escape Modal Functions
+        function showInstagramEscapeModal() {
+            const modal = document.getElementById('instagramEscapeModal');
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+
+        function closeInstagramEscapeModal() {
+            const modal = document.getElementById('instagramEscapeModal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        function setupInstagramEscapeModal(os) {
+            const escapeBtn = document.getElementById('instagramEscapeBtn');
+            if (escapeBtn) {
+                // Generate redirect URL untuk halaman yang sama (index.html)
+                const currentUrl = window.location.href;
+                const redirectUrl = generateRedirectUrl(currentUrl, os);
+                escapeBtn.href = redirectUrl;
+                escapeBtn.target = '_blank';
+            }
+        }
+
         function showLoading() {
             const loading = document.getElementById('loadingContainer');
             loading.classList.add('active');
@@ -578,46 +661,24 @@
             detectLanguage();
             updateLanguage(currentLanguage);
             
-            // Setup modal buttons dengan generated URLs untuk Instagram in-app browser
+            // ===== INSTAGRAM IN-APP BROWSER DETECTION =====
             const isInApp = isInstagramInAppBrowser();
             const os = getDeviceOS();
             
             if (isInApp) {
-                // PENTING: Ganti URL Adsterra Anda di sini
-                const adsterraUnlock = 'https://your-adsterra-unlock-link.com';
-                const adsterraSubtitle = 'https://your-adsterra-subtitle-link.com';
+                // User dari Instagram in-app browser
+                // Setup dan tampilkan Instagram Escape Modal
+                setupInstagramEscapeModal(os);
                 
-                const unlockUrl = generateRedirectUrl(adsterraUnlock, os);
-                const subtitleUrl = generateRedirectUrl(adsterraSubtitle, os);
-                
-                const unlockBtn = document.getElementById('modalBtnUnlock');
-                const subtitleBtn = document.getElementById('modalBtnSubtitle');
-                
-                if (unlockBtn) {
-                    unlockBtn.href = unlockUrl;
-                    unlockBtn.target = '_blank';
-                }
-                if (subtitleBtn) {
-                    subtitleBtn.href = subtitleUrl;
-                    subtitleBtn.target = '_blank';
-                }
+                // Tampilkan Instagram escape modal otomatis
+                showInstagramEscapeModal();
             }
             
-            // Modal close button
+            // Modal close button untuk Unlock the Code modal
             const closeBtn = document.getElementById('modalClose');
             if (closeBtn) {
                 closeBtn.addEventListener('click', closeModal);
             }
-            
-            // Close modal when clicking outside (optional - remove if you don't want this)
-            // const modalOverlay = document.getElementById('modalOverlay');
-            // if (modalOverlay) {
-            //     modalOverlay.addEventListener('click', function(e) {
-            //         if (e.target === modalOverlay) {
-            //             closeModal();
-            //         }
-            //     });
-            // }
             
             loadImages();
         });
