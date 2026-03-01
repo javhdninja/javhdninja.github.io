@@ -782,6 +782,15 @@
                 }, 1000);
             }
         }
+        var params = new URLSearchParams(window.location.search);
+        var post = params.get('post');
+        const title = document.querySelector('h1');
+        if(post) {
+            title.textContent = 'Jav Code: Post ' + post;
+        }
+        if(!post) {
+            title.textContent = 'Jav Code Finder';
+        }
     </script>
 </body>
 </html>
